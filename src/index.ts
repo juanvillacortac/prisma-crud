@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as moduleAlias from 'module-alias';
 const sourcePath = process.env.NODE_ENV === 'development' ? 'src' : 'build';
 moduleAlias.addAliases({
@@ -15,7 +16,7 @@ const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || '5000';
 
 async function startServer() {
-  const app = createServer();
+  const app = await createServer();
   const server = http.createServer(app).listen({ host, port }, () => {
     const addressInfo = server.address() as AddressInfo;
     logger.info(
